@@ -984,6 +984,60 @@
 </div>
 
 <!-- ═══════════════════ CHECKIN ═══════════════════ -->
+
+
+<!-- ═══════════════════ NEXTSTEP SCREEN ═══════════════════ -->
+<div class="screen" id="screen-nextstep">
+  <div style="background:linear-gradient(150deg,#6B28F5 0%,#5E17EB 55%,#4A10C4 100%);padding:48px 22px 32px;text-align:center;position:relative;overflow:hidden;border-radius:0 0 32px 32px;">
+    <i class="hd-star" style="font-size:24px;top:14px;left:16px;opacity:.8">★</i>
+    <i class="hd-star" style="font-size:13px;top:36px;left:46px;opacity:.5">✦</i>
+    <i class="hd-star" style="font-size:20px;top:10px;left:42%;opacity:.6">✦</i>
+    <i class="hd-star" style="font-size:22px;top:12px;right:18px;opacity:.75">★</i>
+    <i class="hd-star" style="font-size:11px;top:34px;right:50px;opacity:.5">✦</i>
+    <i class="hd-star" style="font-size:15px;bottom:18px;right:22px;opacity:.5">★</i>
+    <div style="font-size:44px;margin-bottom:8px;line-height:1.2;">☀️🧡✨</div>
+    <div style="color:#fff;font-size:21px;font-weight:900;margin-bottom:8px;line-height:1.3;">מה הצעד הקטן הבא שלי?</div>
+    <div style="color:rgba(255,255,255,.8);font-size:14px;line-height:1.5;">פעולה קטנה אחת<br>שמחברת בין מודעות לעשייה 💛</div>
+  </div>
+  <div style="padding:22px 18px 24px;overflow-y:auto;">
+    <div class="bubbles" id="nextstep-bubbles" style="margin-bottom:0"></div>
+    <div style="padding:16px 0 20px;display:flex;gap:10px;">
+      <button class="btn" style="flex:1;background:rgba(94,23,235,.1);color:#5E17EB;border:1.5px solid #5E17EB;" onclick="skipNextstep()">דלגי</button>
+      <button class="btn btn-purple" style="flex:2;" onclick="saveNextstep()">המשך ←</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ VITALITY SCREEN ═══════════════════ -->
+<div class="screen" id="screen-vitality">
+  <div class="sum-top" style="padding:40px 22px 28px;text-align:center;">
+    <i class="hd-star" style="font-size:26px;top:12px;left:16px;opacity:.8">★</i>
+    <i class="hd-star" style="font-size:14px;top:34px;left:50px;opacity:.5">✦</i>
+    <i class="hd-star" style="font-size:20px;top:10px;left:40%;opacity:.6">✦</i>
+    <i class="hd-star" style="font-size:24px;top:10px;right:18px;opacity:.75">★</i>
+    <i class="hd-star" style="font-size:12px;top:36px;right:52px;opacity:.5">✦</i>
+    <i class="hd-star" style="font-size:16px;bottom:20px;right:20px;opacity:.55">★</i>
+    <div style="font-size:36px;margin-bottom:8px;">✨</div>
+    <div style="color:#fff;font-size:22px;font-weight:900;margin-bottom:6px;">רגע קטן של חיוניות</div>
+    <div style="color:rgba(255,255,255,.8);font-size:14px;line-height:1.5;">גם ביום אוטומט יש רגע אחד של חיים<br>שימי לב לו 💛</div>
+    <div style="color:rgba(255,255,255,.6);font-size:12px;margin-top:8px;font-style:italic;">מופיע פעם בשבוע</div>
+  </div>
+  <div style="padding:20px 18px 24px;overflow-y:auto;">
+    <div class="bubble-group">
+      <div class="bubble-q">⭐ מה היה הרגע?</div>
+      <div class="bubbles" id="vit-bubbles-moment"></div>
+    </div>
+    <div class="bubble-group">
+      <div class="bubble-q">💜 איפה הרגשתי את זה בגוף?</div>
+      <div class="bubbles" id="vit-bubbles-bodyspot"></div>
+    </div>
+    <div style="padding:8px 0 20px;display:flex;gap:10px;">
+      <button class="btn" style="flex:1;background:rgba(94,23,235,.1);color:#5E17EB;border:1.5px solid #5E17EB;" onclick="skipVitality()">דלגי בפעם הזאת</button>
+      <button class="btn btn-purple" style="flex:2;" onclick="saveVitality()">שמרי ✓</button>
+    </div>
+  </div>
+</div>
+
 <div class="screen" id="screen-checkin">
   <div class="flow-hdr">
     <button class="back-btn" onclick="backCheckin()">→</button>
@@ -1120,11 +1174,10 @@ const LV = {
 };
 
 const STEPS = [
-  { id:'level',    title:'איפה את על הסוללה?',   ctr:'1/5' },
-  { id:'body',     title:'מה הגוף אומר?',          ctr:'2/5' },
-  { id:'training', title:'איך זה נראה בפעולה?',   ctr:'3/5' },
-  { id:'need',     title:'מה את צריכה עכשיו?',    ctr:'4/5' },
-  { id:'vitality', title:'רגע קטן של חיוניות ✨', ctr:'5/5' },
+  { id:'level',    title:'איפה את על הסוללה?',  ctr:'1/4' },
+  { id:'body',     title:'מה הגוף אומר?',        ctr:'2/4' },
+  { id:'training', title:'איך זה נראה בפעולה?', ctr:'3/4' },
+  { id:'need',     title:'מה את צריכה עכשיו?',  ctr:'4/4' },
 ];
 
 const STORAGE_KEY          = 'battery_checkins_v1';
@@ -1577,7 +1630,7 @@ function stepHTML(id) {
     <div class="q-title">מה אני מרגישה בגוף <u>עכשיו</u>?</div>
     <div class="q-sub">לחצי על כל מה שמתאים — אפשר לבחור כמה</div>
     <div class="bubbles" id="bubbles-sens" style="margin-bottom:0">
-      ${['כבדות','קלילות','מתח בשרירים','התרגשות','עירנות','שלווה','דפיקות לב','עייפות','כאב','חמימות','רעד','חוסר אנרגיה'].map(w=>
+      ${['כבדות','קלילות','מתח בשרירים','התרגשות','עירנות','שלווה','דפיקות לב','עייפות','כאב','רעד','חוסר אנרגיה','לחץ בחזה','כאב בטן','אנרגיה מתפרצת','חוסר שקט','נשימה קלה','נשימה כבדה','קפיציות','נוקשות','זרימה','חולשה','כוח'].map(w=>
         `<button class="bubble" onclick="toggleBubble(this,'sens')">${w}</button>`).join('')}
     </div>`;
 
@@ -1588,7 +1641,7 @@ function stepHTML(id) {
     <div class="bubble-group">
       <div class="bubble-q"><span class="barrow">▶</span>איך אני נראית?</div>
       <div class="bubbles" id="bubbles-look">
-        ${['מהירה','מרוכזת','חולמנית','רפויה','חזקה','איטית','דינמית','מסורבלת'].map(w=>
+        ${['מהירה','מרוכזת','חולמנית','רפויה','חזקה','איטית','דינמית','מסורבלת','חדה','מוכנה','אנרגטית','כבויה','דרוכה','בטוחה','מהוססת','יציבה','משוחררת','לחוצה'].map(w=>
           `<button class="bubble" onclick="toggleBubble(this,'look')">${w}</button>`).join('')}
       </div>
     </div>
@@ -1596,7 +1649,7 @@ function stepHTML(id) {
     <div class="bubble-group">
       <div class="bubble-q"><span class="barrow">▶</span>איך אני חושבת?</div>
       <div class="bubbles" id="bubbles-think">
-        ${['ממוקדת','ברורה','מבולבלת','קופצת','חדה','שלילית','חיובית','איטית'].map(w=>
+        ${['ממוקדת','ברורה','מבולבלת','קופצת','חדה','שלילית','חיובית','איטית','רגועה','עמוסה','בטוחה','ספקנית','יצירתית','עסוקה בתוצאה','עסוקה בתהליך','ביקורתית','אופטימית','תקועה'].map(w=>
           `<button class="bubble" onclick="toggleBubble(this,'think')">${w}</button>`).join('')}
       </div>
     </div>
@@ -1604,7 +1657,7 @@ function stepHTML(id) {
     <div class="bubble-group">
       <div class="bubble-q"><span class="barrow">▶</span>איך אני מרגישה?</div>
       <div class="bubbles" id="bubbles-feel">
-        ${['בטוחה','שלווה','נלהבת','מרגשת','חרדה','עייפה','כבדה','קלה'].map(w=>
+        ${['בטוחה','שלווה','נלהבת','מתרגשת','חרדה','עייפה','כבדה','קלה','גאה','מוכנה','דרוכה','מסוקרנת','נחושה','מתוחה','לחוצה','מחויבת','חסרת ביטחון','אופטימית'].map(w=>
           `<button class="bubble" onclick="toggleBubble(this,'feel')">${w}</button>`).join('')}
       </div>
     </div>`;
@@ -1613,11 +1666,19 @@ function stepHTML(id) {
     <div class="q-title">מה אני צריכה <u>עכשיו</u>?</div>
     <div class="q-sub">לחצי על כל מה שמתאים — אפשר לבחור כמה</div>
     <div class="bubbles" id="bubbles-need" style="margin-bottom:0">
-      ${['מנוחה','מים','אוכל','עידוד','חיבור','שקט','תנועה','שיחה','חיבוק','מוטיבציה','ריכוז','להיות לבד'].map(w=>
+      ${['מנוחה','מים','אוכל','עידוד','חיבור','שקט','תנועה','שיחה','חיבוק','מוטיבציה','ריכוז','להיות לבד','נשימה','מוזיקה','התארגנות','זמן לעצמי','ביטחון','פריקה','חיוך','תזכורת למה חשוב','מטרה ברורה','פחות לחץ','מישהו שיקשיב','רגע בטבע','להאט','להתניע'].map(w=>
         `<button class="bubble" onclick="toggleBubble(this,'need')">${w}</button>`).join('')}
     </div>`;
 
-  if (id==='vitality') return `
+  if (id==='nextstep') return `
+    <div class="q-title">מה הצעד הקטן הבא שלי? 🚀</div>
+    <div class="q-sub">פעולה קטנה אחת שמחברת בין מודעות לעשייה</div>
+    <div class="bubbles" id="bubbles-nextstep" style="margin-bottom:0">
+      ${['לנשום','לשתות','להתחמם','לדבר עם מישהו','להתרכז במשימה הבאה','להזכיר לעצמי שאני מסוגלת','להתחיל בקטן','פשוט להיכנס למים','לסמוך על האימון','ליהנות מהרגע'].map(w=>
+        `<button class="bubble" onclick="toggleBubble(this,'nextstep')">${w}</button>`).join('')}
+    </div>\`;
+
+  if (id==='vitality') return \`
     <div class="vital-banner">
       <div class="vital-title">✨ רגע קטן של חיוניות</div>
       <div class="vital-sub">גם ביום אוטומט יש רגע אחד של חיים — שימי לב לו 💛</div>
@@ -1625,14 +1686,14 @@ function stepHTML(id) {
     <div class="bubble-group">
       <div class="bubble-q">⭐ מה היה הרגע?</div>
       <div class="bubbles" id="bubbles-moment">
-        ${['סיום אימון קשה','צחוק עם חברה','הצלחה קטנה','תנועה חופשית','מחמאה שקיבלתי','קשר עם הקבוצה','רגע של שקט','ניצחון'].map(w=>
+        ${['סיום אימון קשה','צחוק עם חברה','הצלחה קטנה','תנועה חופשית','מחמאה שקיבלתי','קשר עם הקבוצה','רגע של שקט','ניצחון','עזרתי למישהו','הרגשתי שייכת','למדתי משהו חדש','התגברתי על קושי','הרגשתי חזקה','מישהו האמין בי','הצלחתי להתמקד','עשיתי משהו בשביל עצמי','נהניתי מהרגע','הייתי אמיצה','חוויה עם המשפחה','מוזיקה שאהבתי'].map(w=>
           `<button class="bubble" onclick="toggleBubble(this,'moment')">${w}</button>`).join('')}
       </div>
     </div>
     <div class="bubble-group">
       <div class="bubble-q">💜 איפה הרגשתי את זה בגוף?</div>
       <div class="bubbles" id="bubbles-bodyspot">
-        ${['חזה','בטן','ידיים','רגליים','פנים','גרון','גב','כל הגוף'].map(w=>
+        ${['חזה','בטן','ידיים','רגליים','פנים','גרון','גב','כל הגוף','כתפיים','ראש','לב','נשימה','כפות ידיים','כפות רגליים','הבטן והחזה','קשה להצביע'].map(w=>
           `<button class="bubble" onclick="toggleBubble(this,'bodyspot')">${w}</button>`).join('')}
       </div>
     </div>`;
@@ -1700,6 +1761,7 @@ function restoreStep(id) {
     restoreBubbles('feel',  draft.feel);
   }
   if (id==='need')     restoreBubbles('need',     draft.need);
+  if (id==='nextstep') restoreBubbles('nextstep', draft.nextstep);
   if (id==='vitality') {
     restoreBubbles('moment',   draft.moment);
     restoreBubbles('bodyspot', draft.bvital);
@@ -1723,12 +1785,13 @@ function saveStep(id) {
 function nextStep() {
   if (STEPS[stepIdx].id==='level' && !draft.level) { alert('נא לבחור רמת סוללה 🔋'); return; }
   saveStep(STEPS[stepIdx].id);
-  if (STEPS[stepIdx].id==='vitality') { markVitalityShown(); finishCheckin(); return; }
   if (stepIdx < STEPS.length-1) {
-    const nextId = STEPS[stepIdx+1].id;
-    if (nextId==='vitality' && !shouldShowVitality()) { finishCheckin(); return; }
     stepIdx++; renderStep();
-  } else finishCheckin();
+  } else {
+    // checkin steps done → show nextstep screen
+    showScreen('screen-nextstep');
+    renderNextstepScreen();
+  }
 }
 
 
@@ -1754,8 +1817,8 @@ function showStreakModal(info, name) {
     btn.textContent = 'יאללה, קדימה 💪';
   } else {
     icon.textContent  = '💜';
-    title.textContent = `3 ימים שאת חסרת אנרגיה${n}`;
-    body.textContent  = 'תזכורת בשבילך — בימים אלו כדאי לך לדאוג ל:';
+    title.textContent = `כבר 3 ימים שאת חסרת אנרגיה${n}`;
+    body.textContent  = 'זה הזמן להכיר לך את הדברים החשובים לך שיכולים לתת לך המון כוחות:';
     tags.innerHTML = info.needs && info.needs.length
       ? info.needs.map(nd=>`<span style="background:rgba(255,255,255,.2);color:#fff;padding:5px 14px;border-radius:20px;font-size:13px;font-weight:700;">${nd}</span>`).join('')
       : '<span style="color:rgba(255,255,255,.8);">לעצמך 🌿</span>';
@@ -1770,6 +1833,57 @@ function closeStreakModal() {
   const el = document.getElementById('streak-modal-overlay');
   if (el) el.style.display = 'none';
   document.body.style.overflow = '';
+}
+
+
+
+/* ── NEXTSTEP SCREEN ── */
+function renderNextstepScreen() {
+  const steps = ['לנשום','לשתות','להתחמם','לדבר עם מישהו','להתרכז במשימה הבאה','להזכיר לעצמי שאני מסוגלת','להתחיל בקטן','פשוט להיכנס למים','לסמוך על האימון','ליהנות מהרגע'];
+  const el = document.getElementById('nextstep-bubbles');
+  if (el) el.innerHTML = steps.map(w=>`<button class="bubble" onclick="toggleBubble(this,'nextstep-sel')">${w}</button>`).join('');
+}
+
+function saveNextstep() {
+  draft.nextstep = getSelected('nextstep-sel');
+  if (shouldShowVitality()) {
+    showScreen('screen-vitality');
+    renderVitalityScreen();
+  } else {
+    finishCheckin();
+  }
+}
+
+function skipNextstep() {
+  if (shouldShowVitality()) {
+    showScreen('screen-vitality');
+    renderVitalityScreen();
+  } else {
+    finishCheckin();
+  }
+}
+
+/* ── VITALITY SCREEN ── */
+function renderVitalityScreen() {
+  const moments = ['סיום אימון קשה','צחוק עם חברה','הצלחה קטנה','תנועה חופשית','מחמאה שקיבלתי','קשר עם הקבוצה','רגע של שקט','ניצחון','עזרתי למישהו','הרגשתי שייכת','למדתי משהו חדש','התגברתי על קושי','הרגשתי חזקה','מישהו האמין בי','הצלחתי להתמקד','עשיתי משהו בשביל עצמי','נהניתי מהרגע','הייתי אמיצה','חוויה עם המשפחה','מוזיקה שאהבתי'];
+  const bodyspots = ['חזה','בטן','ידיים','רגליים','פנים','גרון','גב','כל הגוף','כתפיים','ראש','לב','נשימה','כפות ידיים','כפות רגליים','הבטן והחזה','קשה להצביע'];
+
+  const mEl = document.getElementById('vit-bubbles-moment');
+  const bEl = document.getElementById('vit-bubbles-bodyspot');
+  if (mEl) mEl.innerHTML = moments.map(w=>`<button class="bubble" onclick="toggleBubble(this,'vit-moment')">${w}</button>`).join('');
+  if (bEl) bEl.innerHTML = bodyspots.map(w=>`<button class="bubble" onclick="toggleBubble(this,'vit-bodyspot')">${w}</button>`).join('');
+}
+
+function saveVitality() {
+  draft.moment = getSelected('vit-moment');
+  draft.bvital = getSelected('vit-bodyspot');
+  markVitalityShown();
+  finishCheckin();
+}
+
+function skipVitality() {
+  markVitalityShown();
+  finishCheckin();
 }
 
 function finishCheckin() {
